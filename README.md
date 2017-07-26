@@ -1,6 +1,22 @@
 # Password Strength Calculator
 
-[TODO. There will be project description]
+Calculate strength of your password from 1(min) to 10(max)
+
+# Quickstart
+
+
+Example of script launch on Linux, Python 3.5:
+
+```#!bash
+
+$ python password_strength.py
+input password: fde87
+# output example
+2
+
+
+```
+
 
 # Project Goals
 
