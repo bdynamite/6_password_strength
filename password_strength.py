@@ -1,23 +1,61 @@
 import re
 
 
-def get_password_strength(password):
-    answer = 0
-    if len(password) > 6:
-        answer += 1
-    if re.search(r'[a-z]', password):
-        answer += 1
-    if re.search(r'[A-Z]', password):
-        answer += 1
+def check_case_sensitivity(password):
+    if password.islower() or password.isupper():
+        return 1
+    return 2
+
+
+def check_digits(password):
     if re.search(r'\d', password):
-        answer += 1
+        return 1
+    return 0
+
+
+def check_special_chars(password):
     if re.search(r'[!@#$%&]', password):
-        answer += 1
-    if len(password) > 10:
-        answer *= 2
-    return answer
+        return 1
+    return 0
+
+
+def check_length(password):
+    if len(password) < 10:
+        return 1
+    elif len(password) < 14:
+        return 2
+    elif len(password) < 18:
+        return 3
+    return 4
+
+
+def get_password_strength(password):
+    strength = 2
+    strength += check_case_sensitivity(password)
+    strength += check_digits(password)
+    strength += check_special_chars(password)
+    strength += check_length(password)
+    return strength
+
+
+def print_error(error):
+    print('Invalid password ({})'.format(error))
+
+
+def check_password(password):
+    if len(password) < 6:
+        print_error('length less then 6')
+        return False
+    if password.isdigit():
+        print_error('only digits')
+        return False
+    if re.search(r'\s', password):
+        print_error('whitespace')
+        return False
+    return True
 
 
 if __name__ == '__main__':
     password = input('input password: ')
-    print(get_password_strength(password))
+    if check_password(password):
+        print('password strength is {}/10'.format(get_password_strength(password)))

@@ -10,9 +10,9 @@ Example of script launch on Linux, Python 3.5:
 ```#!bash
 
 $ python password_strength.py
-input password: fde87
+input password: cdwdc22e2FFE
 # output example
-2
+password strength is 7/10
 
 
 ```
